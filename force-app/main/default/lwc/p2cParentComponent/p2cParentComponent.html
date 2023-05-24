@@ -1,0 +1,7 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Parent Component" >
+        <lightning-input type="text" variant="standard" name="name" label="message to child" placeholder="type here..." onchange = {handlechange}></lightning-input>
+        <c-p2c-child-component message={message}></c-p2c-child-component>
+    </lightning-card>
+
+</template>

@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Accounts" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <template if:true={data}>
+                <lightning-datatable key-field="Id" data={data} columns={columns} selected-rows={preSelectedRows}>
+                </lightning-datatable>
+                pranjal--{preSelectedRows}
+            </template>
+            <template if:true={error}>
+                {error}>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,38 @@
+<template>
+    <div class="slds-form-element slds-has-error">
+    <div>
+        <lightning-input-rich-text
+        value={myVal}
+        onchange={handleChange}>
+    </lightning-input-rich-text>
+    
+    
+    
+    <lightning-formatted-rich-text value={myVal} pattern="<(.)>.?|<(.*) />
+        <(\S*?)[^>]>.?</\1>|<.*?/>" message-when-bad-input="errorMessage"></lightning-formatted-rich-text>
+    
+    </div>    
+    </div>
+    <!-- <lightning-card>
+        <lightning-record-form object-api-name={objectName} fields={fieldlist} onsuccess={successhandler} ></lightning-record-form>    
+    </lightning-card> -->
+    <div>Record ID is {recordId}</div>
+    <div class="slds-card">
+        <div class="slds-box">
+    
+            <lightning-button label="Save"
+    
+                title="Save" variant="success" onclick={showmessage}>
+    
+            </lightning-button>
+    
+            <lightning-button label="Cancel"
+    
+                title="Cancel" variant="destructive" onclick={accnav}>
+    
+            </lightning-button>
+    
+        </div>
+    </div>
+    <div>{outputtext}</div>
+    </template>

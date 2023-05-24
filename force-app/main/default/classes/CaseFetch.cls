@@ -7,8 +7,7 @@ public class CaseFetch {
         return caselist;
       
     }
-    //changes
-    //chnages1
+    
     @AuraEnabled
     public static List<Case> FetchChildCase(string recordId)
     {

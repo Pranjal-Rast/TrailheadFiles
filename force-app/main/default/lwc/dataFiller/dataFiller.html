@@ -1,0 +1,20 @@
+<template>
+    <div class="slds-p-around_medium ">
+        <lightning-input type="text" label="Name" value={name} onchange={handleNameChange}></lightning-input>
+        <lightning-input type="text" label="Phone" value={phone} onchange={handlePhoneChange}></lightning-input>
+        <lightning-input type="text" label="Country" value={country} onchange={handleCountryChange}></lightning-input>
+
+        <lightning-button variant="brand" label="Pass Data " title="Lightning button for adding row " onclick={handleClick} class="slds-button_icon_large slds-align_absolute-center" style="margin:10px;"></lightning-button>
+    </div>
+    
+  
+    <div class="slds-p-around_medium">
+        <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}>
+            {data}
+        </lightning-datatable>
+    </div>
+    
+</template>

@@ -1,0 +1,33 @@
+<template>
+<lightning-quick-action-panel header="Add Promotion">
+
+    <div class="slds-form-element">
+        <div class="slds-input-has-icon slds-input-has-icon_right">
+    
+            <lightning-input type="search" 
+                placeholder="Search Promtions..." onchange = {handleSearch} >
+            </lightning-input>
+        </div>
+        <lightning-datatable
+            key-field="id"
+            data={prodList}
+            columns={columns}
+            searchable = true
+            >
+        </lightning-datatable>
+    </div> 
+    <div slot="footer">
+        <lightning-button
+            variant="neutral"
+            label="Cancel"
+            onclick = {handleCancel}
+        ></lightning-button>
+        <lightning-button
+            variant="brand"
+            label="Next"
+            class="slds-m-left_x-small"
+            onclick={handleNext}
+        ></lightning-button>
+    </div>
+</lightning-quick-action-panel>
+</template>

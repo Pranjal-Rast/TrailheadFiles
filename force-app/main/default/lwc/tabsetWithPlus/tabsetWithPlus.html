@@ -1,0 +1,18 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Hello" icon-name="standard:account">
+        <lightning-button-icon  icon-name="utility:down" variant="border-filled" alternative-text="Show More" slot="actions"></lightning-button-icon>
+        <lightning-tabset variant="scoped" active-tab-value={activeTab}>
+    <template for:each={tabs} for:item="tab">
+    <lightning-tab label={tab.label} key={tab.id} value={tab.value}>
+        You are on {tab.value}.
+    </lightning-tab>
+    </template>
+    <lightning-tab label="+" value="Plus" onactive={handlePlus}>
+        An error occured.
+    </lightning-tab>
+</lightning-tabset>
+        <p slot="footer"></p>
+    </lightning-card>
+
+
+</template>

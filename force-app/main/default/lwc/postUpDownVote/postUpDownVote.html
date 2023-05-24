@@ -1,0 +1,42 @@
+<template>
+<lightning-card  variant="Narrow"  title="Post Wall" >
+
+<div class="slds-grid slds-gutters">
+    <div class="slds-col slds-size_1-of-10">
+    <span>
+    
+    </span> 
+  </div>
+  <div class="slds-col slds-size_1-of-10">
+    <span>
+        <table>
+  <tr>
+    <td><lightning-button-icon icon-name="utility:chevronup" variant="bare"  alternative-text="Upvote" title="Upvote" onclick={handleUp}></lightning-button-icon></td>
+  </tr>
+  <tr>
+    <td ><p>{count}</p></td>
+  </tr>
+  <tr>
+    <td><lightning-button-icon icon-name="utility:chevrondown" variant="bare"  alternative-text="Downvote" title="Downvote" onclick = {handleDown}></lightning-button-icon></td>
+  </tr>
+</table>
+    
+            <!-- <lightning-button-icon icon-name="utility:chevronup"  alternative-text="Upvote" title="Upvote" onclick={handleUp}></lightning-button-icon>
+            <br>{count}<br>
+            <lightning-button-icon icon-name="utility:chevrondown"  alternative-text="Downvote" title="Downvote" onclick = {handleDown}></lightning-button-icon>
+         -->
+    </span>
+  </div>
+  <div class="slds-col slds-size_1-of-10">
+  </div>
+  <div class="slds-col slds-size_7-of-10">
+      <span>
+          <br>
+      Here is my thought about the product.
+     </span>
+  </div>
+</div>
+
+
+</lightning-card>
+</template>

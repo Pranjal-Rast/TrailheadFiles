@@ -1,0 +1,55 @@
+<template>
+<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_large">
+    <div class="slds-modal__container">
+    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="false">
+    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+    </svg>
+    <span class="slds-assistive-text">Cancel and close</span>
+    </button>
+    <div class="slds-modal__header">
+    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Clone Record</h1>
+    </div>
+    <div class="slds-modal__content slds-p-around_medium " id="modal-content-id-1">
+            <lightning-card title="Record Form Account Details">
+                <lightning-layout>
+                    <lightning-layout-item>
+                        <lightning-record-form
+                            record-id={recordId}
+                            object-api-name="Opportunity"
+                            layout-type="Full"
+                            columns="3"
+                            mode="edit"
+                            onsubmit={onSubmitHandler}>
+                        </lightning-record-form>
+                        <div class="slds-hide">
+                        <lightning-record-edit-form object-api-name="Opportunity" column="2" onsubmit={submitMeth}
+                        onsuccess={successHandler} onerror={errorHandler}  >
+                            <lightning-input-field field-name = "Amount"  ></lightning-input-field>
+                            <lightning-input-field field-name = "IsPrivate" ></lightning-input-field>
+                            <lightning-input-field field-name = "Name" ></lightning-input-field>
+                            <lightning-input-field field-name = "CloseDate" ></lightning-input-field>
+                            <lightning-input-field field-name = "Type" ></lightning-input-field>
+                            <lightning-input-field field-name = "NextStep" ></lightning-input-field>
+                            <lightning-input-field field-name = "AccountId" ></lightning-input-field>
+                            <lightning-input-field field-name = "StageName" ></lightning-input-field>
+                            <lightning-input-field field-name = "Probability" ></lightning-input-field>
+                            <lightning-input-field field-name = "CampaignId" ></lightning-input-field>
+                            <lightning-input-field field-name = "CurrentGenerators__c" ></lightning-input-field>
+                            <lightning-input-field field-name = "DeliveryInstallationStatus__c" ></lightning-input-field>
+                            <lightning-input-field field-name = "Description" ></lightning-input-field>
+                            <lightning-input-field field-name = "LeadSource" ></lightning-input-field>
+                            <lightning-input-field field-name = "MainCompetitors__c" ></lightning-input-field>
+                            <lightning-input-field field-name = "OrderNumber__c" ></lightning-input-field>
+                            <lightning-input-field field-name = "TrackingNumber__c" ></lightning-input-field>
+                        </lightning-record-edit-form>
+                    </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-card>
+    </div>
+    </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    <div></div>
+</template>

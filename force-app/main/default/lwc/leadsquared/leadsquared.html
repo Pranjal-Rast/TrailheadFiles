@@ -1,0 +1,265 @@
+<template>
+    <div class="main-mapping-container">
+        <template if:true={isVisible}> Please check the Field level security. </template>
+        <template if:false={isVisible}>
+            <lightning-accordion allow-multiple-sections-open active-section-name={contactActiveSections}>
+                <div class="slds-box slds-theme_shade">
+                    <lightning-accordion-section label="Contact Object Settings" name="contactObjectSettings">
+                        <template if:true={listOfDefaultContactMappedObjectField}>
+                            <div class="los-container slds-is-relative slds-grid slds-wrap slds-gutters">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input name="Name" type="text" label="Name"
+                                        value={listOfDefaultContactMappedObjectField.Name} placeholder="Name here"
+                                        variant=label-inline onchange={handleContactMappingChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input type="text" label="Source"
+                                        value={listOfDefaultContactMappedObjectField.LeadSquareds__Source_Object__c}
+                                        readonly variant=label-inline></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input name="IsActive" type="checkbox" label="Is Active?"
+                                        checked={listOfDefaultContactMappedObjectField.LeadSquareds__Is_Active__c}
+                                        variant=label-inline onchange={handleContactMappingChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input type="text" label="Target"
+                                        value={listOfDefaultContactMappedObjectField.LeadSquareds__Target_Object__c}
+                                        readonly variant=label-inline></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-textarea name="Description" type="text" label="Description"
+                                        value={listOfDefaultContactMappedObjectField.LeadSquareds__Description__c}
+                                        placeholder="Description" variant=label-inline
+                                        onchange={handleContactMappingChange}></lightning-textarea>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-textarea name="Filter" label="Filter"
+                                        value={listOfDefaultContactMappedObjectField.LeadSquareds__Filter__c}
+                                        placeholder="Filter" variant=label-inline
+                                        onchange={handleContactMappingChange}>
+                                    </lightning-textarea>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="slds-form-element_horizontal slds-form-element">
+                                        <label class="slds-form-element__label">Do Not Overwrite Salesforce data</label>
+                                        <lightning-input name="OverwriteSFData" type="checkbox" label="Configure"
+                                            checked={listOfDefaultContactMappedObjectField.LeadSquareds__Do_Not_Overwrite__c}
+                                            onchange={handleContactMappingChange} variant=label-hidden></lightning-input>
+                                        <template if:true={listOfDefaultContactMappedObjectField.LeadSquareds__Do_Not_Overwrite__c}>
+                                            <lightning-button variant="base" label="Configure" onclick={handleConfigure}
+                                                class="slds-m-left_x-small">
+                                            </lightning-button>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </lightning-accordion-section>
+                </div>
+                <div class="slds-box slds-theme_shade slds-m-top_medium">
+                    <lightning-accordion-section label="Contact Field Mapping" name="contactFieldMapping">
+                        <!--Default Contact Field Mapping-->
+                        <div class="slds-box slds-box_small slds-scrollable"
+                            style="height:24rem; background-color: white; border:0px; ">
+
+                            <!--Header of Contact Field Mapping-->
+                            <div class="table-container">
+                                <table class="custom-table slds-table">
+                                    <thead>
+                                        <!--Header of Contact Field Mapping-->
+                                        <tr>
+                                            <th scope="col"> <b>Salesforce</b> </th>
+                                            <th scope="col"></th>
+                                            <th scope="col" style="width: 60px;"></th>
+                                            <th scope="col"> <b>LeadSquared</b> </th>
+                                            <th scope="col"></th>
+                                            <th scope="col"> <b>Inbound Default Value </b>
+                                            </th>
+                                            <th scope="col"> <b>Outbound Default Value</b>
+                                             </th>
+                                            <th scope="col"> <b>Sync Type</b> </th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+
+                                    <template if:true={listOfdefaultContactFieldWithDataType}>
+                                        <template for:each={listOfdefaultContactFieldWithDataType} for:item="contact"
+                                            for:index="index">
+                                            <tbody key={contact.SourceField}>
+                                                <tr>
+                                                    <td>
+                                                        <lightning-combobox value={contact.SourceField}
+                                                            class="control{index}" options={SFContactFieldOptions} disabled>
+                                                        </lightning-combobox>
+                                                    </td>
+                                                    <td>
+                                                        <div> &nbsp; {contact.SourceField}</div>
+                                                        <div> &nbsp; {contact.SourceField_Type} </div>
+                                                    </td>
+                                                    <td style="text-align: center;">
+                                                        <template if:true={contact.isBoth}>
+                                                            <lightning-icon icon-name="utility:product_transfer"
+                                                                alternative-text="Both" title="Both" size="x-small">
+                                                            </lightning-icon>
+                                                        </template>
+                                                        <template if:true={contact.isInbound}>
+                                                            <lightning-icon icon-name="utility:back"
+                                                                alternative-text="inbound" title="inbound" size="xx-small">
+                                                            </lightning-icon>
+                                                        </template>
+                                                        <template if:true={contact.isOutbound}>
+                                                            <lightning-icon icon-name="utility:forward"
+                                                                alternative-text="outbound" title="outbound"
+                                                                size="xx-small"></lightning-icon>
+                                                        </template>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-combobox value={contact.TargetField}
+                                                            class="control{index}" options={LSContactFieldOptions} disabled>
+                                                        </lightning-combobox>
+                                                    </td>
+                                                    <td>
+                                                        <div> &nbsp; {contact.TargetField}</div>
+                                                        <div> &nbsp; {contact.TargetField_Type} </div>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input variant="label-hidden" label="Input Value"
+                                                            value={contact.InboundDefaultField} name="InboundDefaultField"
+                                                            onchange={handleDefaultFieldChange} access-key={contact.SourceField}
+                                                            id={index} disabled={contact.isSFReadOnly}></lightning-input>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input variant="label-hidden" label="Input Value"
+                                                            value={contact.OutboundDefaultField} name="OutboundDefaultField"
+                                                            onchange={handleDefaultFieldChange} access-key={contact.SourceField}
+                                                            id={index} disabled={contact.isLSReadOnly}>
+                                                        </lightning-input>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-combobox value={contact.SyncType} class="control{index}"
+                                                            options={syncTypeOptions} disabled>
+                                                        </lightning-combobox>
+                                                    </td>
+                                                    <td>
+                                                        <template if:false={contact.isDefault}>
+                                                            <lightning-button-icon icon-name="utility:ban"
+                                                                variant="container" access-key={contact.SourceField}
+                                                                id={index} onclick={handleRemoveContact}>
+                                                            </lightning-button-icon>
+                                                        </template>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bg-white" colspan="9"></td>
+                                                </tr>
+                                            </tbody>
+                                        </template>
+                                    </template>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <lightning-combobox name="SFOption" value={SFContactFieldAPIName}
+                                                    options={SFContactFieldOptions} onchange={handleContactFieldOptions}
+                                                    dropdown-alignment="auto">
+                                                </lightning-combobox>
+                                            </td>
+                                            <td>
+                                                <div> &nbsp; {SFContactFieldAPIName}</div>
+                                                <div> &nbsp; {SFContactFieldTypeAndSize}</div>
+                                            </td>
+                                            <td>
+                                                <lightning-icon icon-name="utility:product_transfer" alternative-text="Both"
+                                                    title="Both" size="x-small" style="float:center;"></lightning-icon>
+                                            </td>
+                                            <td>
+                                                <lightning-combobox name="LSOption" value={LSContactFieldAPIName}
+                                                    options={LSContactFieldOptions} onchange={handleContactFieldOptions}
+                                                    dropdown-alignment="auto">
+                                                </lightning-combobox>
+                                            </td>
+                                            <td>
+                                                <div> &nbsp; {LSContactFieldAPIName} </div>
+                                                <div> &nbsp; {LSContactFieldTypeAndSize} </div>
+                                            </td>
+                                            <td>
+                                                <lightning-input variant="label-hidden" name="InboundDefaultField"
+                                                    onchange={handleContactFieldOptions} label="Input Value"
+                                                    placeholder="Enter Input Value" value={InboundDefaultField}></lightning-input>
+                                            </td>
+                                            <td>
+                                                <lightning-input variant="label-hidden" name="OutboundDefaultField"
+                                                    onchange={handleContactFieldOptions} label="Input Value"
+                                                    placeholder="Enter Output Value" value={OutboundDefaultField}></lightning-input>
+                                            </td>
+                                            <td>
+                                                <lightning-combobox name="syncOption" value={selectedContactSyncType}
+                                                    options={syncTypeOptions} onchange={handleContactFieldOptions}
+                                                    dropdown-alignment="auto"></lightning-combobox>
+                                            </td>
+                                            <td>
+                                                <lightning-button-icon icon-name="utility:new" variant="container"
+                                                    alternative-text="Add Contact Field Mapping"
+                                                    onclick={addContactFieldMapping}>
+                                                </lightning-button-icon>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </lightning-accordion-section>
+                </div>
+            </lightning-accordion>
+            <br>
+            <lightning-layout>
+                <div class="slds-align_absolute-center slds-m-top_large">
+                    <lightning-button variant="brand" onclick={handleSave} name="save" label="Save" disabled={isChanged}>
+                    </lightning-button>
+                </div>
+            </lightning-layout>
+            <br>
+            <br>
+            <span> <b>*Both: </b> Data flows both ways</span><br>
+            <span> <b>*Inbound Sync: </b>Updates from LeadSquared data, pulled into sync with Salesforce</span><br>
+            <span> <b>*Outbound Sync: </b>Data from Salesforce pushed out to sync with LeadSquared</span><br>
+        </template>
+        <template if:true={isModel}>
+            <section aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container ">
+                    <header class="slds-modal__header" style="background: #009AFC;">
+                        <div class="slds-grid ">
+                            <div class="slds-col slds-size_10-of-12">
+                                <h2 class="slds-text-heading_small slds-text-color_inverse">Which Salesforce fields can
+                                    be
+                                    updated with LeadSquared
+                                    data?</h2>
+                            </div>
+                            <div class="slds-col slds-size_2-of-12">
+                                <lightning-icon class="slds-float_right" icon-name="utility:close" size="xx-small"
+                                    variant="inverse" onclick={handleCloseModal}>
+                                </lightning-icon>
+                            </div>
+
+                        </div>
+                    </header>
+                    <div class="slds-modal__content">
+                        <div class="slds-p-around_small">
+                            <lightning-dual-listbox name="Overwritten_Fields" label="Select Overwritten Fields"
+                                source-label="Fields that won't be overwritten"
+                                selected-label="Fields that can be overwritten" variant="label-hidden" size="11"
+                                disable-reordering options={listOfallSFFields} value={listOfOverwrittenFields}
+                                onchange={handleOverwrittenFieldChange}></lightning-dual-listbox>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <template if:true={isLoading}>
+            <div class="new_loader showloader"></div>
+            <div class="new_loader_bg showloader"></div>
+        </template>
+    </div>
+</template>

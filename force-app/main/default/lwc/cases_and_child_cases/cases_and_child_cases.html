@@ -1,0 +1,16 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Account Cases Component" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            
+            <template for:each={ParentCases} for:item="pc">
+                <tr class="" key = {pc.Id}>
+                    <td data-label="Name">
+                        <div>Case ::: {pc.CaseNumber}<br>
+                            <c-show-child-cases parent={pc.Id}></c-show-child-cases>
+                    </div>
+                    </td>
+                    </tr>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,6 @@
+.custom-add-promotion-modal + .slds-backdrop,
+.custom-add-promotion-modal {
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+}

@@ -1,0 +1,2 @@
+<apex:page standardController="Opportunity"  extensions="MakePrivateOppExtension" action="{!updateRecords}" sidebar="false"  showQuickActionVfHeader="false">
+</apex:page>

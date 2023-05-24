@@ -1,0 +1,7 @@
+<template>
+<lightning-record-view-form record-id={recordId} fields={fields}>
+        <template if:true={error}>
+          <p>An error has occurred. Please try again later.</p>
+        </template>
+      </lightning-record-view-form>
+</template>

@@ -1,0 +1,68 @@
+<template>
+<lightning-card  variant="Narrow"  title="Financial Summary" icon-name="standard:account"  class="slds-m-right_xx-small slds-m-left_xx-small">
+    <lightning-button-icon  icon-name="utility:refresh" variant="border-filled" alternative-text="Refresh" slot="actions" onclick={refreshHandler}></lightning-button-icon>
+    <table class="slds-table slds-no-row-hover slds-table_bordered slds-table_col-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th class="" scope="col">
+                                            <div ></div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div >CUSTOMER</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div >VENDOR</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-text-align_right">MARGIN</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="slds-hint-parent">
+                                        <td>
+                                            <strong>Quoted</strong>
+                                        </td>
+                                        <td >
+                                            <div>11/12/2018</div>
+                                        </td>
+                                        <td >
+                                            <div>11/12/2018</div>
+                                        </td>
+                                        <td >
+                                            <div class={MarginColor}>{MarginAmount}</div>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td>
+                                            <strong>Invoiced</strong>
+                                        </td>
+                                        <td >
+                                            <div >05/05/2018</div>
+                                        </td>
+                                        <td >
+                                            <div >11/12/2018</div>
+                                        </td>
+                                        <td >
+                                            <div class={MarginColor}>11/12/2018</div>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td>
+                                            <strong>Paid</strong>
+                                        </td>
+                                        <td >
+                                            <div >05/05/2018</div>
+                                        </td>
+                                        <td >
+                                            <div >11/12/2018</div>
+                                        </td>
+                                        <td >
+                                            <div class={MarginColor}>11/12/2018</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+    <p slot="footer" class="slds-text-align_right">{Updateddate}</p>
+</lightning-card>
+</template>
